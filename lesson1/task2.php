@@ -39,3 +39,27 @@ echo "Max Prime Divisor:" . $heap->top() . PHP_EOL;
 /*------------------------------*/
 echo PHP_EOL;
 echo "Exec time: " . (microtime(true) - $start) . PHP_EOL;
+
+
+
+/*----------Alternative solution------------------*/
+
+function maxPrimeDivider($num)
+{
+  $res = $num % 2 ? 1 : 2;
+
+  while (!($num % 2)) {
+    $num /= 2;
+  }
+
+  for ($q = 3; $q*$q < $num; $q += 2) {
+
+    for (; !($num % $q); $num /= $q) {
+      $res = $q;
+    }
+  }
+
+  return $res > $num ? $res : $num;
+}
+
+var_dump(maxPrimeDivider($number));
